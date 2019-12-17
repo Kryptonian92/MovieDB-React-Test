@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, fireEvent } from 'react-testing-library';
+import { render, cleanup, fireEvent, getByText } from 'react-testing-library';
 import NewMovie from './NewMovie';
 
 //unmounts everything from the dom after each test
@@ -16,4 +16,5 @@ test('<NewMovie>', () => {
     expect(queryByTestId('movie-form')).toBeTruthy();
 
     expect(container.firstChild).toMatchSnapshot();
+
 });
