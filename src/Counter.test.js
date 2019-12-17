@@ -2,7 +2,9 @@ import React from 'react';
 import { render, cleanup, fireEvent } from 'react-testing-library';
 import Counter from './Counter';
 
-//wrapper.debug() to show what the dom is rendering
+//unmounts everything from the dom after each test
+afterEach(cleanup);
+
 test('<Counter />', () =>{
     // alternate render method - const wrapper = render(<Counter />);
     const {debug, getByTestId} = render(<Counter />);
