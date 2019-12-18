@@ -20,10 +20,10 @@ test('<MovieForm>', () => {
     });
 
     fireEvent.click(getByText('Submit'));
-    debug()
+    // debug()
 
     expect(onSubmitMock).toHaveBeenCalledTimes(1);
-    
+
     // pulling text from this.state and passing it into submit form
     expect(onSubmitMock).toHaveBeenCalledWith({
         text: 'hello',
