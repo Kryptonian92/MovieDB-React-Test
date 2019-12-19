@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, fireEvent, getByText } from 'react-testing-library';
+import { render, cleanup, waitForElement, wait } from 'react-testing-library';
 import { MemoryRouter} from 'react-router-dom';
 import MovieDetail from './MovieDetail';
 
@@ -21,13 +21,19 @@ const match={
 //mocking error
 console.error = jest.fn();
 
-test('<Movie />', () => {
-    fetch.mockResponseOnce(JSON.stringify({
-        movie:{
-            id: 'hi',
-            title: "Level up rules!"
-        }
-    }))
-    const { debug } = render(<MovieDetail match={match}/>);
-    debug();
+const movie = {
+    id: 'hi',
+    title: "Level Up Rules!"  
+};
+
+//mocked async fetch
+test('<MovieDetail />', async () => {
+    fetch.mockResponseOnce(
+        JSON.stringify(movie)
+);
+    //debug by adding debug to render and running debug()
+    const {getByTestId } = render(<MovieDetail match={match}/>);
+    await waitForElement(() => getByTestId('movie-title'));
+
+    expect(getByTestId('movie-title').textContent).toBe(movie.title)
 })
